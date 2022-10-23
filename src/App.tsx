@@ -3,6 +3,7 @@ import Map from "./components/Map";
 import { Title } from "./components/Title";
 import { store } from "./store";
 import { Provider } from "react-redux";
+import { Info } from "./components/Info";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Provider store={store}>
         <Map />
       </Provider>
+      <Info />
     </div>
   );
 }
