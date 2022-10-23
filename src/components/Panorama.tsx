@@ -37,6 +37,7 @@ export const Panorama: FC<{
         <div className="panorama-backdrop">
           Вы были близки на {result.toFixed(2)} км
           <br />
+          <br />
           Вы можете
           <div
             className="panorama-backdrop-button"
@@ -46,7 +47,7 @@ export const Panorama: FC<{
           >
             Продолжить
           </div>
-          или выберете новый город
+          или сыграйте в другой город
         </div>
       )}
     </div>
