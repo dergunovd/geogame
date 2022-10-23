@@ -1,28 +1,54 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { ymaps } from "../ymaps";
+import { useAppDispatch, useAppSelector } from "../store";
+import { nextLevel } from "../actions";
 
-export const Panorama: FC<{ point?: [number, number] }> = ({ point }) => {
+export const Panorama: FC<{
+  panorama?: ymaps.IPanorama;
+}> = ({ panorama }) => {
+  const { result } = useAppSelector((state) => state.game);
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     let player: ymaps.panorama.Player;
-    if (!point) {
-      return;
+    if (panorama) {
+      Object.defineProperty(Object.getPrototypeOf(panorama), "getMarkers", {
+        value: () => [],
+      });
+
+      player = new ymaps.panorama.Player("panorama", panorama, {
+        direction: [0, 0],
+        controls: [],
+        suppressMapOpenBlock: true,
+      });
     }
 
-    ymaps?.panorama?.locate(point).then((panoramas) => {
-      if (panoramas.length > 0) {
-        const panorama = panoramas[0];
-        Object.defineProperty(panorama, "getMarkers", {
-          value: () => [],
-        });
-        player = new ymaps.panorama.Player("panorama", panorama, {
-          direction: [0, 0],
-          controls: [],
-        });
-      }
-    }, console.error);
-
     return () => player?.destroy();
-  }, [point]);
+  }, [panorama]);
 
-  return <div id="panorama" style={{ width: 600, height: 400 }} />;
+  return (
+    <div id="panorama" className="panorama">
+      {!panorama && (
+        <div className="panorama-backdrop">
+          Чтобы начать выберите город из меню сверху
+        </div>
+      )}
+      {result !== undefined && (
+        <div className="panorama-backdrop">
+          Вы были близки на {result.toFixed(2)} км
+          <br />
+          Вы можете
+          <div
+            className="panorama-backdrop-button"
+            onClick={() => {
+              dispatch(nextLevel());
+            }}
+          >
+            Продолжить
+          </div>
+          или выберете новый город
+        </div>
+      )}
+    </div>
+  );
 };
