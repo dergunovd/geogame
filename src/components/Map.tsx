@@ -22,6 +22,7 @@ const Map = () => {
       const map = new ymaps.Map("map", {
         center: [55.76, 37.64],
         zoom: 10,
+        controls: ["zoomControl"],
       });
 
       setMap(map);
@@ -108,7 +109,9 @@ const Map = () => {
               const panorama = panoramas[0];
               setPanorama(panorama);
               // TODO: в экшн
-              setTargetCoords(point);
+              setTargetCoords(
+                panorama.getPosition().slice(0, 2) as [number, number]
+              );
 
               break;
             }

@@ -12,7 +12,11 @@ export const Title: FC = () => {
     <h1 className="title">
       <span>
         GeoGame <sup>β</sup>{" "}
-        <span style={{ color }} onMouseEnter={hoverHandler}>
+        <span
+          style={{ color }}
+          onTouchStart={hoverHandler}
+          onMouseEnter={hoverHandler}
+        >
           dergunov.net
         </span>
       </span>
