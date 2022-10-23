@@ -1,11 +1,9 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "geogame",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "@pbe/react-yandex-maps": "^1.1.9",
     "@reduxjs/toolkit": "^1.8.6",
-    "@turf/boolean-point-in-polygon": "^6.5.0",
     "@turf/turf": "^6.5.0",
     "geojson": "^0.5.0",
     "react": "^18.2.0",
@@ -19,7 +17,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "scp -r build/* dergunov@gg.dergunov.net:~/gg"
   },
   "eslintConfig": {
     "extends": [

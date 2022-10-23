@@ -1560,13 +1560,6 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@pbe/react-yandex-maps@^1.1.9":
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/@pbe/react-yandex-maps/-/react-yandex-maps-1.1.9.tgz#48e675456fa1a036cccf74f88d8a9fd7f22bfb33"
-  integrity sha512-CDco9whLtP5IEK4FH9SZL60yVh4VO5pPemuyjrsmjUXhu/yXjcTdYtuT6DjwbsT/SvsqcyQ7OWumYAPCxt9VfA==
-  dependencies:
-    "@types/yandex-maps" "2.1.21"
-
 "@pmmmwh/react-refresh-webpack-plugin@^0.5.3":
   version "0.5.8"
   resolved "https://registry.yarnpkg.com/@pmmmwh/react-refresh-webpack-plugin/-/react-refresh-webpack-plugin-0.5.8.tgz#da3383761e2c0c440610819f3204769022a38d12"
@@ -3291,11 +3284,6 @@
   integrity sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==
   dependencies:
     "@types/node" "*"
-
-"@types/yandex-maps@2.1.21":
-  version "2.1.21"
-  resolved "https://registry.yarnpkg.com/@types/yandex-maps/-/yandex-maps-2.1.21.tgz#d3801ddbd2541412a8a8693edb168c6702b407a1"
-  integrity sha512-rRLCmIODrnzmo7MIGfFRPwPN7ITyAIupUdbeGSC0KqUIvlR7YrY4v8Do7798/WhO4v63B1hCvI+ECwCB4k26AA==
 
 "@types/yandex-maps@^2.1.26":
   version "2.1.26"
