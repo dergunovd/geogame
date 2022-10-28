@@ -1,4 +1,4 @@
-import { Geometry } from "geojson";
+import { BBox, Polygon } from "geojson";
 
 export const enum GameActions {
   SET_CITY = "GAME/SET_CITY",
@@ -6,14 +6,16 @@ export const enum GameActions {
   NEXT_LEVEL = "GAME/NEXT_LEVEL",
 }
 
-export const setCity = (city: Geometry) => ({
+export const setCity = (city: Polygon, bbox: BBox, radius: number) => ({
   type: GameActions.SET_CITY,
   city,
+  bbox,
+  radius,
 });
 
-export const setResult = (result: number) => ({
+export const setResult = (resultDistance: number) => ({
   type: GameActions.SET_RESULT,
-  result,
+  resultDistance: resultDistance,
 });
 
 export const nextLevel = () => ({

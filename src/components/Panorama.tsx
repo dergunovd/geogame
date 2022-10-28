@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { ymaps } from "../ymaps";
 import { useAppDispatch, useAppSelector } from "../store";
 import { nextLevel } from "../actions";
@@ -6,7 +6,7 @@ import { nextLevel } from "../actions";
 export const Panorama: FC<{
   panorama?: ymaps.IPanorama;
 }> = ({ panorama }) => {
-  const { result } = useAppSelector((state) => state.game);
+  const { resultDistance, radius } = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -26,6 +26,22 @@ export const Panorama: FC<{
     return () => player?.destroy();
   }, [panorama]);
 
+  const resultText = useMemo(() => {
+    if (radius !== undefined && resultDistance !== undefined) {
+      const resultPercent = Number(
+        ((radius - resultDistance * 2) / radius).toFixed(2)
+      );
+
+      if (resultPercent < 0.7) return "Попробуйте еще";
+      if (resultPercent < 0.8) return "Почти";
+      if (resultPercent < 0.9) return "Очень близко";
+      if (resultPercent < 0.95) return "Отлично!";
+      if (resultPercent < 0.99) return "Прекрасно!";
+      return "Идеально!";
+    }
+    return undefined;
+  }, [resultDistance, radius]);
+
   return (
     <div id="panorama" className="panorama">
       {!panorama && (
@@ -33,21 +49,23 @@ export const Panorama: FC<{
           Чтобы начать выберите город из меню сверху
         </div>
       )}
-      {result !== undefined && (
+      {resultDistance !== undefined && (
         <div className="panorama-backdrop">
-          Вы были близки на {result.toFixed(2)} км
-          <br />
-          <br />
-          Вы можете
-          <div
-            className="panorama-backdrop-button"
-            onClick={() => {
-              dispatch(nextLevel());
-            }}
-          >
-            Продолжить
-          </div>
-          или сыграйте в другой город
+          <>
+            {resultText}
+            <br />
+            {resultDistance.toFixed(2)} км
+            <br />
+            <div
+              className="panorama-backdrop-button"
+              onClick={() => {
+                dispatch(nextLevel());
+              }}
+            >
+              Продолжить
+            </div>
+            <small>или выберите другой город</small>
+          </>
         </div>
       )}
     </div>

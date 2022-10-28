@@ -1,13 +1,11 @@
 import { BBox, Geometry } from "geojson";
 
-type ReturnType = BBox | null;
-
-export const getBbox = (geometry: Geometry): ReturnType => {
+export const getBbox = (geometry: Geometry): BBox | null => {
   if (geometry.type !== "Polygon") {
     throw Error("getBbox allow only Polygon");
   }
 
-  let bbox: ReturnType = null;
+  let bbox: BBox | null = null;
 
   geometry.coordinates.forEach((points) => {
     points.forEach(([lat, lon]) => {

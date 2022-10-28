@@ -1,16 +1,20 @@
 import { Reducer } from "redux";
-import { Geometry } from "geojson";
+import { BBox, Polygon } from "geojson";
 import { GameActions } from "../actions";
 
 interface GameStore {
-  city?: Geometry;
-  result?: number;
+  city?: Polygon;
+  bbox?: BBox;
+  radius?: number;
+  resultDistance?: number;
   level: number;
 }
 
 const initialState: GameStore = {
   city: undefined,
-  result: undefined,
+  bbox: undefined,
+  radius: undefined,
+  resultDistance: undefined,
   level: 0,
 };
 
@@ -23,19 +27,21 @@ export const gameReducer: Reducer<GameStore> = (
       return {
         ...state,
         city: action.city,
+        bbox: action.bbox,
+        radius: action.radius,
         level: 0,
-        result: undefined,
+        resultDistance: undefined,
       };
     case GameActions.SET_RESULT:
       return {
         ...state,
-        result: action.result,
+        resultDistance: action.resultDistance,
       };
     case GameActions.NEXT_LEVEL:
       return {
         ...state,
         level: state.level + 1,
-        result: undefined,
+        resultDistance: undefined,
       };
     default:
       return state;
